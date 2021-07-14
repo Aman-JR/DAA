@@ -1,0 +1,82 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int jump(int a[],int size,int key,int n,int &count)
+{
+    
+
+    int lowpoint = 0;
+    int highpoint = n;
+
+   while(a[highpoint]<=key  && highpoint < size)
+    {
+        count++;
+        lowpoint = highpoint;
+        highpoint += n;
+
+        if(a[highpoint]>=size -1)
+        {
+            highpoint = size;
+        }
+
+    }
+
+    for(int  i=lowpoint;i<=highpoint;i++)
+    {
+        count++;
+        if(a[i]==key)
+        {
+            return i;
+        }
+
+    }
+    return -1;
+
+
+
+}
+
+int main()
+{
+    int n,key,j;
+    int count =0;
+    cin>>n;
+
+    int *p = new int[n];
+
+    for(int i =0;i<n;i++)
+    {
+        cin>>p[i];
+    }
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(p[j]<p[i])
+            {
+                int temp = p[i];
+                p[i]=p[j];
+                p[j]=temp;
+
+            }
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<p[i]<<" ";
+    }
+    cout<<endl;
+    cin>>key;
+    cin>>j;
+    if( jump(p,n,key,j,count) == -1)
+    {
+        cout<<"NOT PRESENT "<<count<<endl;
+
+    }
+    else{
+        cout<<"PRESENT "<<jump(p,n,key,j,count) + 1<<" "<<count<<endl;
+    }
+
+}
