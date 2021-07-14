@@ -1,0 +1,46 @@
+#include<iostream>
+
+using namespace std;
+
+int linear(int a[],int size, int key,int &count)
+{
+    
+    if(size == 0)
+    {
+        return 0;
+    }
+    for(int i=0;i<size;i++)
+    {
+        count++;
+        
+        if(a[i]==key)
+            {
+                return i;
+            }
+    }
+    return -1;
+
+}
+int main()
+{
+    int n,key;
+    int count =0;
+    cin>>n;
+
+    int *p = new int[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>p[i];
+    }
+    cin>>key;
+    if(linear(p,n,key,count) == -1)
+    {
+        cout<<"NOT PRESENT "<<count<<endl;
+    }
+    else{
+        cout<<"PRESENT "<<linear(p,n,key,count)<<endl;
+    }
+
+
+    delete []p;
+}
